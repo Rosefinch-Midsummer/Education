@@ -1,0 +1,253 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>李兵《书院大师朱熹的科举生涯与科举观评析》 - Mdbook Template</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="前言.html">前言</a></li><li class="chapter-item expanded affix "><li class="part-title">微观</li><li class="chapter-item expanded "><a href="个人成长.html"><strong aria-hidden="true">1.</strong> 个人成长</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="礼记大学.html"><strong aria-hidden="true">1.1.</strong> 《礼记·大学》</a></li><li class="chapter-item expanded "><a href="礼记学记.html"><strong aria-hidden="true">1.2.</strong> 《礼记·学记》</a></li><li class="chapter-item expanded "><a href="朱子读书法.html"><strong aria-hidden="true">1.3.</strong> 《朱子读书法》</a></li><li class="chapter-item expanded "><a href="学习如何学习.html"><strong aria-hidden="true">1.4.</strong> Learning How to Learn</a></li><li class="chapter-item expanded "><a href="如何高效学习.html"><strong aria-hidden="true">1.5.</strong> Study Less, Learn More</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">宏观</li><li class="chapter-item expanded "><a href="重建教化体系.html"><strong aria-hidden="true">2.</strong> 重建教化体系</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="李兵《书院大师朱熹的科举生涯与科举观评析》.html" class="active"><strong aria-hidden="true">2.1.</strong> 李兵《书院大师朱熹的科举生涯与科举观评析》</a></li><li class="chapter-item expanded "><a href="朱子论取士.html"><strong aria-hidden="true">2.2.</strong> 朱子论取士</a></li><li class="chapter-item expanded "><a href="宋史选举志.html"><strong aria-hidden="true">2.3.</strong> 《宋史·选举志》</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Mdbook Template</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<h1 id="李兵书院大师朱熹的科举生涯与科举观评析"><a class="header" href="#李兵书院大师朱熹的科举生涯与科举观评析">李兵《书院大师朱熹的科举生涯与科举观评析》</a></h1>
+<p>摘 要：</p>
+<p>朱熹是南宋新儒学的集大成者，他在推动南宋书院发展的同时，对科举制度提出了严厉的批评，但他并不从根本上否定科举制度。在苦读应试经历的感性认识基础上，朱熹提出了重视德业修养的科举观，反对片面追求科举功名。这是新儒家在频繁禁学的背景下，为规避禁学的压制，利用其对学术话语权的掌握来参与现实问题的主要内容之一。因此，自20世纪30年代开始，不少研究者所持的南宋书院反科举的观点就值得商榷了。</p>
+<p>关键词：朱熹 科举实践 科举观 书院发展</p>
+<p>南宋是中国书院发展的高峰期，也是程朱之学体系最终形成的阶段，作为民间教育组织的书院为尚处于民间文化的新儒学提供了研究和传播基地，新儒学的发展则为书院存在的合法性注入了新因子，二者之间密切关联，相互促进，这已经成为学术界的共识。然而，在不少研究书院的学者看来，以朱熹为代表的南宋新儒家讲学书院的动力来自对以“理”或“心”为本体的哲学体系无限渴望和追求，实现这一过程必然要压制追求功名利禄的欲望，加之大多数书院大师对科举取士制度有相当严厉的批评，这样，使不少研究者便得出了南宋书院反科举的论断。20世纪30年代，著名的教育史家陈东原先生就指出：“反对科举的精神是书院不朽的灵魂”。（陈东原：《书院史略》，载《学风》第1卷，第9期）傅顺时先生亦将“反对科举”视为书院的主要精神之一。（傅顺时：《两宋书院制度》，载《之江期刊》新1卷第7号）60年代台湾的孙彦民先生则进一步认为：“最初之书院因反对科举而创设。其后却又赖其所反对之科举而维持其存在。”（孙彦民：《宋代书院制度之研究》，台北：国立政治大学教育研究所教育研究丛刊乙种1966年版，8页）但笔者认为这种观点是对南宋书院与科举关系的误读，我们可以在长期从事书院活动的南宋新儒学派的集大成者——朱熹的科举观上得到验证。</p>
+<h2 id="一-科举生涯与书院发展"><a class="header" href="#一-科举生涯与书院发展">一　科举生涯与书院发展</a></h2>
+<p>朱熹的科举生涯完全可以用一帆风顺来形容，十八岁“举建州乡贡”，十九岁“登王佐榜进士”，中第五甲九十名。他从解试到殿试都是一次性通过，没有任何波折，而且他是十九岁中进士，这在绍兴十八年（1148年）戊辰榜平均年龄为32岁的新科进士中是相当年轻的。进士及第之后，朱熹先后在福建、江西、浙江、湖南和朝廷为官。</p>
+<p>在朱熹自己的著述和有关朱熹生平记载的文献中，罕有关于朱熹学习科举之学的文字，但这是否就意味着朱熹没有苦读应试的经历呢？南宋高宗绍兴元年（1131年），年仅十四岁的朱熹遵照其父朱松的遗嘱，从学于“学有渊源”的籍溪胡宪、白水刘勉之和屏山刘子翚三人，并要求朱熹“惟其言之听”。在这三人之中，由刘子翚专门负责教授朱熹掌握科举之学，《年谱考异》云：“师事屏山为举业，于白水、籍溪盖以父执事之。”尽管朱熹对自己学习科举之学的经历有意淡化：“某少年时，只做得十五六篇举业，后来只是如此发举及第”。但朱熹在这段时间在学习方面用力甚勤，据他自己回忆：“某自十六七岁时，下工夫读书。彼时四旁皆无津涯，只自恁地硬著力去做。至今日虽不足道，但当时也是喫了多少辛苦读书。”值得深究的是，这段时间他苦读的内容到底是什么，是进行学术研究，还是读儒家经典以应科举呢？笔者认为朱熹此时苦读的内容主要是后者，这有以下两个方面的理由：其一是朱熹当时的处境是寄人篱下，而且其父朱松临终所托的刘子翚对他是“但以举子见期”。（朱熹：《朱熹集》卷84《跋家藏刘病翁遗帖》四川教育出版社1996年版，4340页）无论是从改变自身的处境，还是不辜负父亲的临终嘱托、老师的殷切期望等方面来看，朱熹在这一段时间的学习都是以应试科举为目的；其二是朱熹的这一段苦读亦非是着眼于学术水平的提高或者进行学术研究，他在《朱子语类》中云：“某从十七八岁读《孟子》，至二十岁，只逐句去理会，更不通透。二十岁已后，方知不可恁地读。”（本段除特别注明出处之外，引文均出自《朱子年谱》卷1）从他对自身为学历程的反思就可以清楚地看到，朱熹在二十岁之前读书学习并不是要将儒家经典理解通透，然后提出自己的学术主张，而只是和其他读书应举者一样读儒家经典以应科举。正是由于有如此用功的窗前苦读，其在科场一帆风顺也就不足为怪了，朱熹的科举经历为其科举观的确立提供了感性认识。</p>
+<p>绍兴二十三年（1153年）七月，进士出身的朱熹出任同安主簿，开始了其历仕生涯。朱熹从进土及第至庆元三年（1197年）落职罢祠，前后共计五十年之久，但其真正担任地方官吏的时间只有九年，在朝廷任经筵侍讲也仅有四十余日，在有限的出仕时间中，朱熹始终将修复书院、讲学于书院作为主要的政务活动之一。笔者稽考各地方志和史料，将朱熹担任地方官时修复和讲学的书院统计如下：</p>
+<p>如果我们将担任祠职享受朝廷俸禄亦视为官员的话，那么朱熹创建、修复和讲学的书院总数至少有29所之多。（参阅李兵：《书院与科举关系研究》，厦门大学高等教育科学研究所2004年博士论文）进士出身是朱熹能出任同安主簿的主要条件，此后的任官虽然与其学术地位的提高密切相关，但其进士身份的作用也是不可忽视的因素。而担任地方官员的朱熹又能充分调动包括政治、经济和人力资源来发展书院。朱熹在修复和扩大岳麓书院时就直接利用了官府的经费，“本州州学之外，复置岳麓书院，……牒教授及帖书院，照会施行。仍请一面指挥合干人排备斋舍、几案、床榻之属，并帖钱粮官，于本州赡学料次钱及书院学粮内通融支给，须至行遣。”（《朱熹集》卷100《潭州委教授措置岳麓书院牒》，5110页）在主持修复白鹿洞书院以后，请求朝廷赐额、赐书。这两所书院的修复极大地促进了南宋书院的发展。因此，尽管我们很难将朱熹讲学书院活动与其科举出身的背景联系起来，但进士出身无疑成为影响其参与书院活动的重要有利因素之一。</p>
+<h2 id="二-以德业为应试基础的科举观"><a class="header" href="#二-以德业为应试基础的科举观">二　以德业为应试基础的科举观</a></h2>
+<p>与南宋的其他儒学大师一样，朱熹对科举取士制度影响下的官学教育进行了严厉的批评，朱熹说：“所谓太学者，但为声利之场，而掌其教事者不过取其善为科举之文，而尝得隽于场屋者耳。士之有志于义理者，既无所求于学，其奔趋辐凑而来者，不过为解额之滥，舍选之私而已。师生相视漠然，如行路之人。间相与言，亦未尝开之以德行道艺之实，而月书季考者，又祗以促其嗜利苟得，冒昧无耻之心。殊非国家之所以立学教人之本意也”。（《朱熹集》卷69《学校贡举私议》，3641页）州县之学亦是如此，朱熹云：“今郡县之学官，置博士弟子员，皆未尝考其德行道艺之素，其所受授，又皆世俗之书、进取之业，使人见利而不见义。”（《朱熹集》卷79《衡州石鼓书院记》，4123-4124页）由此可见，朱熹批评科举的言论主要集中在科举取士制度重艺不重德所引发的官学教育的弊端之上。</p>
+<p>然而，朱熹批评的着眼点并非要从根本上否定科举制度，当有人主张废止科举制度，代之以上古时期的乡举里选时，他的回答是：“举里选之法是第一义，今不能行。”当有门人问“今日科举之弊，使有可为之时，此法如何？”朱熹则说：“也废他不得。然亦须有个道理。”（《朱子语类》卷109《论取士》岳麓书社1997年版，2429页。）他认为士人参加科举考试是当时社会条件下的必然选择，他说：“父母责望，不可不应举。”并说：“居今之世，使孔子复生，也不免应举，然岂能累孔子邪！”这是朱熹对当时社会现实情况的一种清醒的认识。在长期的书院活动中，朱熹从来没有禁止书院生徒应举，在其276位书院门人中，进士及第者有24人，占总数的8.6%，这一比例高于南宋省试十七人取一人的比例。（注：根据方彦寿：《朱熹书院门人考》华东师范大学出版社2000年版统计。由于省试的参加者是由各省从数量众多的士人中解送而来的，其基数就相当有限了。因此，我们认为朱熹门人进士及第比例还是相当高的。）</p>
+<p>在主张继续沿用科举取士制度的同时，朱熹亦对科举制度存在的诸多弊端进行了深入的剖析。他认为由于片面读书应举，导致士人没有远大志向是科举教育弊端产生的根本原因，他说：“以科举为为亲，而不为为己之学，只是无志。以举业为妨实学，不知曾妨饮食否，只是无志也。”在朱熹看来，如果不立志，片面追求科举，往往会出现言行不一致的情况，他说：“专做时文底人，他说底都是圣贤说话。且如说廉，他且会说得好；说义，他也会说得好。待他身做处，只自不廉，只自不义，缘他将许多话只是就纸上说。廉，是题目上合说廉；义，是题目上合说义，都不关自家身己些子事。”甚至会沦为追名逐利的小人，至于建功立业根本无从谈起。</p>
+<p>为彻底消除这一弊端，朱熹认为士人必须在研习儒家经典的基础上，将儒家思想内化为良好的道德修养，而不是片面追求科举之学，即所谓立志。他说：“若高见远识之士，读圣贤之书，据吾所见而为文以应之，得失利害之度外，虽日日应举，亦不累也。”在朱熹看来，熟读儒家经典是士人立志的基础。他说：“《六经》、《语》、《孟》皆圣贤遗书，皆当读。……大体己立矣。”</p>
+<p>这样，士人必须面临着如何处理研究儒家经典和读书应举之间关系的问题，往往是为读书应举而耽误了学习儒家经典，“专一做举业工夫，不待不得后枉了气力，便使能竭力去做，又得到状元时，亦自输却这边工夫了。”但朱熹认为，只要能合理地分配时间和精力，并将学习儒家经典摆在相当重要的位置之上，举业和德业二者就不产生矛盾。南安士人黄谦的父亲要求其入官学学习举业，内心相当矛盾，来向朱熹征求处理意见时，他指出：“既是父要公习举业，何不入郡学。日则习举业，夜则看此书，自不相妨，如此则两全。硬要咈父之命，如此则两败，父子相夷矣，何以为学！读书是读甚底？举业亦有何相妨？一旬便做五日举业，亦有五日得暇及此。若说践履涵养，举业尽无相妨。”</p>
+<p>在阐述了举业和德业不相矛盾的基础上，朱熹主张用大量的时间和精力来学习儒家经典，以培养德性。他说：“士人先要分别科举与读书两件，孰轻孰重。若读书上有七分志，科举上有三分，犹自可；若科举七分，读书三分，将来必被他胜却，况此志全是科举！”之所以要如此来分配时间和精力，朱熹认为读经穷理是一件无止境之事，必须终身追求，他说：“某平生穷理，惟不敢自以为是。”而举业则是一件相当容易的事，不需要花费太多的时间与精力，学习举业主要学习作时文行文格式和基本规则而已，他说：“做举业不妨，只是把他格式，括自家道理，都无那追逐时好、回避、忌讳底意思，便好。”而且认为作好时文的基础是掌握儒家经典，当有谭姓弟子问如何作时文时，朱熹的回答是：“略用体式，而括以至理。”（本节除特别著明出处之外，皆为引用《朱子语类》卷13《学七·力行》，216-220页）</p>
+<p>因此，在朱熹看来尽管保留科举制度，使士人获得进身之途是由科举社会已经形成的观实条件所决定的。但他要求生徒通过学习儒家经典，养成良好的德行基础上从事举业，这样既满足了儒家所谓的“学者须是为己”的要求，也体现朝廷设科以选拔德才兼备人才之本意，这是朱熹科举观的核心内容。</p>
+<h2 id="三-实践科举观的设想与行动"><a class="header" href="#三-实践科举观的设想与行动">三　实践科举观的设想与行动</a></h2>
+<p>朱熹将科举弊端产生的原因归结于科举制度考试内容和科目设置上，他说：“如今科举，直是法先不是了。今来欲教吏部与二三郎官尽识得天下官之贤否，定是了不得这事。”并理想地认为以儒家经典为科举考试内容就可以引导士人重视德业修养，他说：“闻虏中科举罢，即晓示云，后举于某经某史命题，仰士子各习此业。使人心有所定止，专心看一经一史，不过数举，则经史皆通。此法甚好。”（《朱子语类》卷109《论取士》，2424-2425页）</p>
+<p>为此，他在《学校贡举私议》提出了改革科举的主张，改革的核心内容就是取消诗赋进士科，改革经义进士科考试内容，提出将诸经、子、史、时务分科分年考试的设想，他说：“若合所当读之书而分之以年，使之各以三年而共通其三四之一。凡《易》、《诗》、《书》为一科，而子年、午年试之；《周礼》、《仪礼》及二《戴记》为一科，而卯年试之；《春秋》及《三传》为一科，而酉年试之。义各二道，诸经皆兼《大学》、《论语》、《中庸》、《孟子》义一道。论则分诸子为四科，而分年以附焉。诸史则《左传》、《国语》、《史记》、《两汉》为一科，《三国》、《晋书》、《南北史》为一科，《新旧唐书》、《五代史》为一科。时务则律历、地理为一科，以次分年如经、子之法，试策各二道。”（《宋史》卷156《选举》）并根据不同的考试形式采取不同的命题要求，“使治经者必守家法，命题者必依章句；答义者必通贯经文，条举众说，而断以己义。”（《文献通考》卷32《选举考》5）认为士人通过这样的熏陶，不但“可以观士子之实学而息其谀佞之奸心矣”，（《朱熹集》卷69《学校贡举私议》）而且可以使士人“无不通之经，无不习之史，皆可为当世之用”。（《文献通考》卷32《选举考》5）在以道德为本体的新儒家看来，通过改革科举制度，促使士人学习儒家经典，是解决北宋以来科举考试中德行和道艺矛盾的重要手段。朱熹的这一主张尽管没有被南宋统治者所采纳，但天下有识之士对此却称颂不已，并在元明两代科举得到相当程度的应用。</p>
+<p>为培养这种德才兼备的科举人才，朱熹曾公开出榜招收举人入白鹿洞书院学习。该告示特别提出参加本年省试的28名举人是此次招收的对象，希望他们能通过书院学习进一步理解朝廷设科取士之意，并许诺给予入院学习的举人提供优厚待遇，“诸君肯来，当戒都养，给馆、致食以俟”。（毛德琦：《白鹿书院志》卷2《招举人入书院状》）尽管从现有的文献资料不能确知此次招收举人的最终数量，但这一举措的提出说明朱熹试图通过书院来培养德才兼备的科举人才。如果确实有举人入院学习的话，这是中国书院史上大规模招收举人入院习业的开始。尽管朱熹招举人入院学习并非直接教授科举之学，而是加强德性培养，但其间接结果是为科举服务。</p>
+<p>在朱熹的科举观中，既严厉批评科举制度，又允许生徒在掌握足够的儒家经典知识之后应举，这种似乎自相矛盾的观点恰恰反映了朱熹的学术理想与社会现实之间的不协调性。一方面，南宋朝廷的频繁禁学运动，使以朱熹为代表的大多数新儒家只能处于政治的边缘，他们以书院为大本营，将学术话语权牢牢地控制在自己手中，使宋代再次出现了政治重心和学术重心分离的现象。为规避禁学的压制，他们只能在学术上坚守高调的道德理想主义，必然利用其对学术话语权的掌握来批评现实，而科举和官学是与士人关系最为密切的制度，多数新儒家对科举与官学制度都相当熟知，很容易从自己所信奉的理想的角度出发窥见其中的纰漏，按照自身或者本学派的信仰来批评它，并试图按照新儒家所坚持的理想模式改而造之。从这一角度而言，以朱熹为代表的新儒家批评科举制度的言论并不是完全建立在全面认识基础上的，批评者的主观因素占了相当大的成分。</p>
+<p>另一方面，以朱熹为代表的新儒家又认识到宋代科举取士制度已经成为士人实现儒家修、齐、治、平理想的必经之途，科举制度已经成为士人的普遍追求，金榜题名成为士人终身追求的目标，朱熹说：“盖入学者既有舍法之刊，又有科举之利，不入学者止有科举一涂，这里便是不均，利之所在，人谁不趋？”（《朱子语类》卷109《论取士》，2427页）正因为如此，朱熹等新儒家为获得支持者，绝对不可能反对或禁止生徒读书应举，只是要求生徒将德性养成摆在首要的位置。此外，他们自身的科举经历也使其感受到科举制度在士人心中的位置，更不可能从根本上否定之。</p>
+<p>因此，通过对朱熹科举观的个案分析，我们可以清楚地看到南宋新儒家并不从根本上反对科举制度，只是理想地希望科举制度按照他们所设计的模式进行相应的改革。这样，南宋书院的主要精神是反对科举的观点似乎就不是十分准确了。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="重建教化体系.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="朱子论取士.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="重建教化体系.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="朱子论取士.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

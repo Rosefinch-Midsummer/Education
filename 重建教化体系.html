@@ -1,0 +1,318 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>重建教化体系 - Mdbook Template</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="前言.html">前言</a></li><li class="chapter-item expanded affix "><li class="part-title">微观</li><li class="chapter-item expanded "><a href="个人成长.html"><strong aria-hidden="true">1.</strong> 个人成长</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="礼记大学.html"><strong aria-hidden="true">1.1.</strong> 《礼记·大学》</a></li><li class="chapter-item expanded "><a href="礼记学记.html"><strong aria-hidden="true">1.2.</strong> 《礼记·学记》</a></li><li class="chapter-item expanded "><a href="朱子读书法.html"><strong aria-hidden="true">1.3.</strong> 《朱子读书法》</a></li><li class="chapter-item expanded "><a href="学习如何学习.html"><strong aria-hidden="true">1.4.</strong> Learning How to Learn</a></li><li class="chapter-item expanded "><a href="如何高效学习.html"><strong aria-hidden="true">1.5.</strong> Study Less, Learn More</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">宏观</li><li class="chapter-item expanded "><a href="重建教化体系.html" class="active"><strong aria-hidden="true">2.</strong> 重建教化体系</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="李兵《书院大师朱熹的科举生涯与科举观评析》.html"><strong aria-hidden="true">2.1.</strong> 李兵《书院大师朱熹的科举生涯与科举观评析》</a></li><li class="chapter-item expanded "><a href="朱子论取士.html"><strong aria-hidden="true">2.2.</strong> 朱子论取士</a></li><li class="chapter-item expanded "><a href="宋史选举志.html"><strong aria-hidden="true">2.3.</strong> 《宋史·选举志》</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Mdbook Template</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<h1 id="重建教化体系"><a class="header" href="#重建教化体系">重建教化体系</a></h1>
+<h2 id="重建科举的重要性"><a class="header" href="#重建科举的重要性">重建科举的重要性</a></h2>
+<p>《四书章句集注·论语章句·先进第十一》中讲“子路使子羔為費宰。子曰：「賊夫人之子。」子路曰：「有民人焉，有社稷焉。何必讀書，然後為學？」子曰：「是故惡夫佞者。」”</p>
+<p>朱子注释如下：</p>
+<blockquote>
+<p>子路為季氏宰而舉之也。夫，音扶，下同。賊，害也。言子羔質美而未學，遽使治民，適以害之。言治民事神皆所以為學。惡，去聲。治民事神，固學者事，然必學之已成，然後可仕以行其學。若初未嘗學，而使之即仕以為學，其不至於慢神而虐民者幾希矣。子路之言，非其本意，但理屈辭窮，而取辨於口以御人耳。故夫子不斥其非，而特惡其佞也。范氏曰：「古者學而後入政。未聞以政學者也。蓋道之本在於修身，而後及於治人，其說具於方冊。讀而知之，然後能行。何可以不讀書也？子路乃欲使子羔以政為學，失先後本末之序矣。不知其過而以口給御人，故夫子惡其佞也。」</p>
+</blockquote>
+<p>显然在孔子、朱子看来治民事神都需要学，这是我们接下来重建科举制度的理论依据。</p>
+<p>中国政府应该把重设科举考试并将其作为合格性考试而非选拔性考试，科举考试合格的人可以有选举权和被选举权从而参与国家治理。通过合理设定分科考试科目和内容，确保通过科举考试的官员有基本的常识。当然，通过科举考试的人不一定都要去当官，经济、法律、金融、管理等内容完全可以应用到商业活动中，士君子成为素封也是一段佳话！</p>
+<p>绵延千年的科举制度既有促进阶层流动的优点，又有特别明显的缺点—–无法评估通过科举考试的人的道德水平。年仅19岁就考中进士的朱子也是当时科举制度的坚定的批判者，也是因为这个缺点。而对于担任父母官而言，道德水平显然比所谓能力更重要。官僚阶层绝大部分的任务都是按古老规则办事，而非奋其私智祸国殃民。</p>
+<p>朱子也认为“举里选之法是第一义”，只是“今不能行”，将来中国光复以后的制度应该有机结合乡举里选、科举考试和察举征辟制度。乡举里选是三皇五帝及三代的制度，效泰西之法恢复之来践行民权主义。察举征辟即允许政务官自行遴选下属。</p>
+<p>恢复科举制，既能遴选有真才实学能力出众的官僚，也能带动教化体系发展，彰显考试院的作用。而朱子对科举制度的反思很值得我们借鉴去重新设计科举制度。</p>
+<blockquote>
+<p>時朱熹嘗欲罷詩賦，而分諸經、子、史、時務之年。其《私議》曰：「古者大學之教，以格物致知爲先，而其考校之法，又以九年知類通達、強立不反爲大成。今《樂經》亡而《禮經》闕，二戴之《禮》已非正經，而又廢其一。經之爲教已不能備，而治經者，類皆舍其所難而就其易，僅窺其一而不及其餘。若諸子之學，同出於聖人，諸史則該古今興亡治亂得失之變，皆不可闕者。而學者一旦豈能盡通？若合所當讀之書，而分之以年，使之各以三年，而共通其三四之一。凡《易》、《詩》、《書》爲一科，而子年、午年試之；《周禮》、《儀禮》及二戴《記》爲一科，而卯年試之；《春秋》及三《傳》爲一科，而酉年試之。義各二道，諸經皆兼《大學》、《論語》、《中庸》、《孟子》義一道。論則分諸子爲四科，而分年以附焉。諸史則《左傳》、《國語》、《史記》、兩《漢》爲一科，《三國》、《晉書》、《南北史》爲一科，新舊《唐書》、《五代史》爲一科。時務則律曆、地理爲一科，以次分年如經、子之法，試策各二道。又使治經者各守家法，答義者必通貫經文，條舉眾說而斷以己意，有司命題必依章句，如是則士無不通之經、史，而皆可用於世矣。」其議雖未上，而天下誦之。</p>
+</blockquote>
+<p>显然朱子也认同分科考试。</p>
+<h2 id="历史上的科举考试内容"><a class="header" href="#历史上的科举考试内容">历史上的科举考试内容</a></h2>
+<p>唐代科举考试种类繁多。如《新唐书·选举志上》中记载：唐制，取士之科，……其科之目，有秀才，有明经，有俊士，有进士，有明法，有明字，有明算，有一史，有三史，有开元礼，有道举，有童子。其中明算科（数学）试《九章律》、《张丘建》、《夏侯阳》、《周髀》、《五经算》各一条，十通六者为及格;试《记遗》、《三等数》，帖读十得九为及格。又试《缀术》七条，《辑古》三条，十通六为及格。就是从传统数学书中抽10道题，至少要答对6题，才能及格通过。明法试《律》、《令》等即考法律知识。史科即考历史的，分为一史和三史两科，一史考《史记》，三史考《史记》、《汉书》、《后汉书》。</p>
+<p>明经科：所谓明经，指熟悉儒家经典而言。唐代将儒家经典分为大经（《礼记》、《春秋左氏传》）；中经（《诗》、《周礼》、《仪礼》）；小经（《易》、《尚书》、《春秋公羊传》、《春秋谷梁传》）三种（注：《新唐书》卷四四《选举志上》）。唐代明经科分为“通二经”、“通三经”、“通五经”三个层次（注：“通二经者，大经、小经各一，若中经二。通三经者，大经、中经、小经各一。通五经者，大经皆通，余经各一。”（《新唐书》卷四四《选举志上》）。武则天在位，张嘉贞“弱冠应五经举”（注：《旧唐书》卷九九《张嘉贞传》）；殷侑，“贞元末，及五经第”（注：《新唐书》卷一《殷侑传》）；唐末，柳玭“应两经举”（注：《旧唐书》卷一六五《柳公绰传》）。这都说明唐代明经分类至少从武则天起至唐末都是如此。然而，唐后期又从明经科分出三礼、三传科。在新增“开元礼举”不久，贞元九年五月二日敕文中又增“三礼举”（注：《唐会要》卷七六《三礼举》）。所谓三礼，即《周礼》、《礼记》、《仪礼》。《周礼》等三礼，本属明经考试内容，现在分出另设。长庆二年又增设三传科。所谓三传为《左传》、《公羊传》、《谷梁传》（注：《唐会要》卷七六《三传·三史附》）。此三传亦属明经考试内容，此时分出另设。明经考试内容主要是“帖文”。所谓帖文是从所试经书中录出千言，而将其中一些文句空缺出来，考生以记忆所及，应一字不漏地将缺字补齐。然而，明经考试内容不止如此。《唐语林》卷八：“唐朝初，明经取通两经，先帖文，乃案章疏试墨策十道。”唐朝初年（武则天在位之前）明经考试尚未分类，只须通两经。此时除帖文外，还需试墨策10道。所谓墨策，是指从经书的“疏议”中出10道问题，以书面回答。开元以后，改为口问大义10条，并加“时务策三道”（注：《新唐书》卷四四《选举志上》）。所谓时务策，即以现实政治、经济、文化等问题，提出对策。唐后期所置开元礼举、三礼举和三传科，不帖文，只问大义和“试策三道”（注：《唐会要》卷七六《开元礼举》、《三礼举》、《三传·三史附》）。</p>
+<p>进士科：《唐语林》卷八：“唐朝初，……进士（试）时务策五道。”进士试时务策五道，自唐初至唐末不改。时务策，虽着眼于现实问题，却往往从儒家经典或“三史”中命题。由于书籍多，故难度大。建中初，裴冀曰：“若礼部先时颁天下曰：某年试题取某经；某年试题取某史，至期果然，亦劝学之一术也。”（注：《唐语林》卷二《文学》）这其实是替考生减轻学业负担着想。从白居易所拟《进士策问五道》中，可知进士所试“时务策五道”的一斑。其一是从《礼记》中摘出“事君有犯无隐”、“为人臣者不显谏”两句看来是相互矛盾的话，问考生如何理解，如何事君？此外，也从现实生活中出现的问题，例如其第五道，问目前钱贵物轻，谷贱伤农，如果考生在天子左右，“其将何辞以对？”（注：《全唐文》卷六六九）从白居易所拟进士策问五道可知，进士考试的这一内容自唐初至唐后期均未改变。《唐语林》卷八：高宗调露二年，“吏部员外郎刘思立以进士试时务策，恐伤肤浅，请加试杂文两道并帖小经。”所谓杂文，是指“一诗，一赋”。从调露年间起进士加试杂文至唐末不改。例如，白居易考进士时，“省试《性习相近远》赋；《玉水记方流》诗”（注：《唐摭言》卷三《慈恩寺题目游赏赋咏杂纪》），这是一例。所谓“并帖小经”，前揭为《易》、《尚书》、《春秋公羊传》、《春秋谷梁传》。开元年间，与明经加试“时务策三道”的同时，“进士改帖大经，加《论语》”（注：《唐语林》卷八《补遗》）。所谓大经，前揭为《礼记》、《春秋左氏传》。这是因为大经篇幅大的缘故。（参考自翁俊雄《唐代科举制度及其运作的演变》一文）</p>
+<p>宋初科举制度，承唐及五代之制，試詩、賦、論各一首，策五道，帖《論語》十帖，對《春秋》或《禮記》墨義十條。主要以詩賦取人。神宗熙寧四年，王安石改革貢舉，進士科罷詩賦、帖經、墨義，改為試四場：初本經大義五道，次《論語》、《孟子》大義各三道，次論一首，次時務策三道。南宋時，分經義進士與詩賦進士。詩賦進士，第一場詩賦各一首，第二場論一首，第三場策三道；經義進士，第一場本經大義三道，《論語》、《孟子》大義各一道，第二、第三場，與詩賦進士同。宋代科舉基本上沿襲唐制，進士科考帖經、墨義和詩賦，弊病很大。 進士以聲韻為務，多昧古今；明經只強記博誦，而其義理，學而無用。王安石任參知政事後，對科舉考試的內容著手進行改革，取消詩賦、帖經、墨義，專以經義、論、策取士。 所謂經義，與論相似，是篇短文，只限於用經書中的語句作題目，並用經書中的意思去發揮。王安石對考試內容的改革，在於通經致用。 熙寧八年，神宗下令廢除詩賦、貼經、墨義取士，頒發王安石的《三經新義》和論、策取士。 並把《易官義》、《詩經》、《書經》、《周禮》、《禮記》稱為大經，《論語》、《孟子》稱為兼經，定為應考士子的必讀書。規定進士考試為四場：一場考大經，二場考兼經，三場考論，最後一場考策。 殿試僅考策，限千字以上。宋代官員出身多是白衣書生，懷牒自進，既無門第訓之染，且對傳統政治亦無一定認識，故從政以後，對實際政不免生疏，加上取士只求經義，一但及第，便可為官，不論才幹人品，故使宋代少出賢才，而政治苟且最终亡國。</p>
+<p>了解宋代科举考试可参考吴钩《宋朝的科举考试究竟是考些什么题目呢？》一文：</p>
+<p>尽管自隋唐直至明清，历代都推行科举制，但科考的题目却不尽相同。而且，科举又分为进士科以及九经、五经、开元礼、三史、三礼、三传、学究、明法、明经诸科，各科的考试内容也不完全一样，比如明法科的考试，主要是测试考生掌握的法律知识与司法技艺。</p>
+<p>我们主要说说进士科省试的试题。宋代省试的科目虽然屡经变革，但有四个科目是必考的：诗赋，经义，论，策。宋人曾从龙说：“国家以科目网罗天下之英隽，义以观其通经，赋以观其博古，论以观其识，策以观其才。”科举制度的设计目的，是识别、发现优秀的治国人才，因此需要以试诗赋考查应试者的文学才情与审美能力，以试经义考查他们对经典义理的理解与阐释，以试论考查他们的学识与见解，以试策考查解决时务的识见与才干。</p>
+<p>唐人考试重诗赋，“铨擢之次，每以诗赋为先”以至有宋朝人认为，唐朝人写诗之所以那么厉害，就是科举考试训练出来的：“或问：唐诗何以胜我朝？唐以诗取士，故多专门之学，我朝之所以不及也。”</p>
+<p>宋人考试更重经义与策论。王安石与司马光政治立场迥异，但在“科举应当考什么”的问题上，却所见略同，都反对以诗赋取士。王安石曾跟宋神宗说：“今以少壮时正当讲求天下正理，乃闭门学作诗赋，及其入官，世事皆所不习，此乃科法败坏人才，致不如古。”建议罢诗赋、考经义。司马光也说：“国家设官分职，以待贤能，大者道德器识以弼谐教化，其次明察惠和以拊循州县，其次方略勇果以扞御外侮，小者刑狱钱谷以供给役使，岂可专取文艺之人，欲以备百官、济万事邪？”</p>
+<p>宋高宗亦告诉大臣：“文学、政事自是两科，诗赋止是文词，策论则须通知古今。所贵于学者，修身、齐家、治国以治天下，专取文词，亦复何用！”诗赋在宋代科举考试中的地位逐渐下降，经义与策论的重要性则得到加强。</p>
+<p>具体来说，试经义是出题者从儒家经书中截取一句话，请考生阐述其蕴含的义理。明清时试经义演变成考“八股文”，从外在的文体形式到内在的思想都严重僵化，但在宋代，人们崇尚“独立之精神，自由之思想”，考生可以自由解经、传注、质疑古说、阐发新见，甚至“全不顾经文，务自立说，心粗胆大，敢为新奇诡异之论”。</p>
+<p>试论，则类似于命题作文，通常是要求考生评论经史记载的某个典故或某一位历史人物。如北宋嘉祐二年（西元1057）进士科省试的论题是“刑赏忠厚之至论”，典出《尚书》孔安国注文：“刑疑付轻，赏疑从众，忠厚之至。”换成现在的说法，这题目就是“论疑罪从轻”。</p>
+<p>试策跟今天公务员考试中的“申论”差不多，一般都是主考官就时务提出具体问题，让考生发表见解，所以又称“策问”，考生的回答则称“对策”。对策通常是千字文，但也有洋洋洒洒写了上万言的对策。</p>
+<p>熙宁四年（西元1071年），苏轼担任开封府试官，出的策问题目是：“晋武平吴以独断而克，苻坚伐晋以独断而亡；齐桓专任管仲而霸，燕哙专任子之而败，事同而功异，何也？”翻译成大白话，就是“试比较专制的优劣”。当时王安石与宋神宗正推行新法，王氏“既得政，每赞上以独断，上专信任之”，出现专制的苗头。苏轼拟此题目，自然是想引导考生对君相“独断”时局的注意与思考。</p>
+<p>我们看宋代科举考试的题目，相信是完全可以遴选出合格之国家治理人才的。</p>
+<p>明代科舉，鄉試以下，與學校教育相輔而行。明制規定，地方所設之府、州、縣學校，每三年舉行兩次考試，第一次稱為歲考，學子成績分為六等；第二次稱為科考，是歲考中第一、二等學子進行複試，及格者為科舉生員，取得參加鄉試的資格。此外，府、州、縣學校所授之科目，有禮、射、書、數四科，其中禮科所習科目，與科舉考試內容關係密切。作為最高學府的國子學（又稱「國子監」），所收監生，種類繁多，其中的「舉監」收納會試落第的舉人，待下次會試時再出監應試，故明代的學校可說是科舉的預備場所。</p>
+<p>伪清最后一次科举真题：</p>
+<p>会试题</p>
+<p>第一场 史论五篇</p>
+<ol>
+<li>
+<p>周唐外重内轻，秦魏外轻内重各有得论；</p>
+</li>
+<li>
+<p>贾谊五饵三表之说，班固讥其疏，然秦穆尝用之以霸西戎，中行说亦以戒单于，其说未尝不效论；</p>
+</li>
+<li>
+<p>诸葛亮无申商之心而用其术，王安石用申商之实而讳其名论；</p>
+</li>
+<li>
+<p>裴度奏宰相宜招延四方贤才与参谋请于私第见客论；</p>
+</li>
+<li>
+<p>北宋结金以图燕赵，南宋助元以攻蔡论。</p>
+</li>
+</ol>
+<p>第二场 各国政治、艺学策五道</p>
+<ol>
+<li>
+<p>学堂之设，其旨有三，所以陶铸国：造就人才，振兴实业，国民不能自立，必立学以教之，使皆有善良之德，忠爱之心，自养之技能，必需之知识，盖东西各国所同，日本则尤注重尚武之精神，此陶铸国民之教育也。讲求政治、法律、理财、外交诸专门，以备任使，此造就人才之教育也。分设农、工、商、矿诸学，以期富国利民，此振兴实业之教育也。三者孰为最急策。</p>
+</li>
+<li>
+<p>泰西外交政策往往借保全土地之名而收利益之实。盍缕举近百年来历史以证明其事策。</p>
+</li>
+<li>
+<p>日本变法之初，聘用西人而国以日强；埃及用外国人至千余员，遂至失财政裁判之权，而国以不振。试详言其得失利弊策。</p>
+</li>
+<li>
+<p>周礼言农政最详，诸子有农家之学。近时各国研究农务，多以人事转移气候，其要曰土地，曰资本，曰劳力，而能善用此三者，实资智识。方今修明学制，列为专科，冀存要术之遗。试陈教农之策。</p>
+</li>
+<li>
+<p>美国禁止华工，久成苛例。今届十年期满。亟宜援引公法，驳正原约，以期保护侨民策。</p>
+</li>
+</ol>
+<p>第三场 《四书》《五经》义</p>
+<p>首题为：“大学之道，在明明德，在亲民，在止于至善义”。</p>
+<p>次题为：“中立而不倚强哉矫义”。</p>
+<p>三题为：“致天下之民，聚天下自货，交易而退，各得其所义”。</p>
+<p>殿试策题</p>
+<ol>
+<li>
+<p>世局日变，任事需才。学堂、警察、交涉、工艺诸政，皆非不学之人所能董理。将欲任以繁剧，必先扩其见闻，陶成之责，是在长官。顾各省设馆课吏，多属具文。上以诚求，下以伪应。宜筹良法，以振策之。</p>
+</li>
+<li>
+<p>汉唐以来兵制，以今日情势证之欤。</p>
+</li>
+<li>
+<p>古之理财，与各国之预算决算有异同否。</p>
+</li>
+<li>
+<p>士习之邪正，视乎教育之得失。古者司徒修明礼教，以选士、俊士、造士为任官之法。汉重明经，复设孝廉贤良诸科，其时贾董之徒最称渊茂。东汉之士以节义相高，论者或病其清议标榜，果定评欤？唐初文学最盛。中叶以后，干进者至有求知己与温卷之名，隆替盛衰之故，试探其原。今欲使四海之内，邪慝不兴，正学日着，其道何之从？</p>
+</li>
+</ol>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="如何高效学习.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="李兵《书院大师朱熹的科举生涯与科举观评析》.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="如何高效学习.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="李兵《书院大师朱熹的科举生涯与科举观评析》.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
