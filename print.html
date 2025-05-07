@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en" class="light" dir="ltr">
+<html lang="en" class="light sidebar-visible" dir="ltr">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
@@ -8,7 +8,7 @@
 
 
         <!-- Custom HTML head -->
-        
+
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
@@ -25,26 +25,29 @@
         <link rel="stylesheet" href="fonts/fonts.css">
 
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" href="highlight.css">
-        <link rel="stylesheet" href="tomorrow-night.css">
-        <link rel="stylesheet" href="ayu-highlight.css">
+        <link rel="stylesheet" id="highlight-css" href="highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
 
-    </head>
-    <body class="sidebar-visible no-js">
-    <div id="body-container">
-        <!-- Provide site root to javascript -->
-        <script>
-            var path_to_root = "";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
-        </script>
 
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
         <script>
             try {
-                var theme = localStorage.getItem('mdbook-theme');
-                var sidebar = localStorage.getItem('mdbook-sidebar');
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
 
                 if (theme.startsWith('"') && theme.endsWith('"')) {
                     localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
@@ -58,24 +61,22 @@
 
         <!-- Set the theme before any content is loaded, prevents flash -->
         <script>
-            var theme;
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
-            var html = document.querySelector('html');
+            const html = document.documentElement;
             html.classList.remove('light')
             html.classList.add(theme);
-            var body = document.querySelector('body');
-            body.classList.remove('no-js')
-            body.classList.add('js');
+            html.classList.add("js");
         </script>
 
         <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
 
         <!-- Hide / unhide sidebar before it is displayed -->
         <script>
-            var body = document.querySelector('body');
-            var sidebar = null;
-            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
@@ -83,45 +84,25 @@
                 sidebar = 'hidden';
             }
             sidebar_toggle.checked = sidebar === 'visible';
-            body.classList.remove('sidebar-visible');
-            body.classList.add("sidebar-" + sidebar);
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="前言.html">前言</a></li><li class="chapter-item expanded affix "><li class="part-title">微观</li><li class="chapter-item expanded "><a href="个人成长.html"><strong aria-hidden="true">1.</strong> 个人成长</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="礼记大学.html"><strong aria-hidden="true">1.1.</strong> 《礼记·大学》</a></li><li class="chapter-item expanded "><a href="礼记学记.html"><strong aria-hidden="true">1.2.</strong> 《礼记·学记》</a></li><li class="chapter-item expanded "><a href="朱子读书法.html"><strong aria-hidden="true">1.3.</strong> 《朱子读书法》</a></li><li class="chapter-item expanded "><a href="学习如何学习.html"><strong aria-hidden="true">1.4.</strong> Learning How to Learn</a></li><li class="chapter-item expanded "><a href="如何高效学习.html"><strong aria-hidden="true">1.5.</strong> Study Less, Learn More</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">宏观</li><li class="chapter-item expanded "><a href="重建教化体系.html"><strong aria-hidden="true">2.</strong> 重建教化体系</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="李兵《书院大师朱熹的科举生涯与科举观评析》.html"><strong aria-hidden="true">2.1.</strong> 李兵《书院大师朱熹的科举生涯与科举观评析》</a></li><li class="chapter-item expanded "><a href="朱子论取士.html"><strong aria-hidden="true">2.2.</strong> 朱子论取士</a></li><li class="chapter-item expanded "><a href="宋史选举志.html"><strong aria-hidden="true">2.3.</strong> 《宋史·选举志》</a></li></ol></li></ol>
-            </div>
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
             </div>
         </nav>
 
-        <!-- Track and set sidebar scroll position -->
-        <script>
-            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
-            sidebarScrollbox.addEventListener('click', function(e) {
-                if (e.target.tagName === 'A') {
-                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
-                }
-            }, { passive: true });
-            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
-            sessionStorage.removeItem('sidebar-scroll');
-            if (sidebarScrollTop) {
-                // preserve sidebar scroll position when navigating via links within sidebar
-                sidebarScrollbox.scrollTop = sidebarScrollTop;
-            } else {
-                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
-                var activeSection = document.querySelector('#sidebar .active');
-                if (activeSection) {
-                    activeSection.scrollIntoView({ block: 'center' });
-                }
-            }
-        </script>
-
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky">
                     <div class="left-buttons">
                         <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
@@ -131,6 +112,7 @@
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
@@ -174,21 +156,21 @@
 
                 <div id="content" class="content">
                     <main>
-                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
 <h1 id="前言"><a class="header" href="#前言">前言</a></h1>
-<div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
 <h1 id="个人成长"><a class="header" href="#个人成长">个人成长</a></h1>
-<div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
 <h1 id="礼记大学"><a class="header" href="#礼记大学">《礼记·大学》</a></h1>
-<div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
 <h1 id="礼记学记"><a class="header" href="#礼记学记">《礼记·学记》</a></h1>
-<div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
 <h1 id="朱子读书法"><a class="header" href="#朱子读书法">《朱子读书法》</a></h1>
-<div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
 <h1 id="learning-how-to-learn"><a class="header" href="#learning-how-to-learn">Learning How to Learn</a></h1>
-<div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
 <h1 id="study-less-learn-more"><a class="header" href="#study-less-learn-more">Study Less, Learn More</a></h1>
-<div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
 <h1 id="重建教化体系"><a class="header" href="#重建教化体系">重建教化体系</a></h1>
 <h2 id="重建科举的重要性"><a class="header" href="#重建科举的重要性">重建科举的重要性</a></h2>
 <p>《四书章句集注·论语章句·先进第十一》中讲“子路使子羔為費宰。子曰：「賊夫人之子。」子路曰：「有民人焉，有社稷焉。何必讀書，然後為學？」子曰：「是故惡夫佞者。」”</p>
@@ -279,7 +261,7 @@
 <p>士习之邪正，视乎教育之得失。古者司徒修明礼教，以选士、俊士、造士为任官之法。汉重明经，复设孝廉贤良诸科，其时贾董之徒最称渊茂。东汉之士以节义相高，论者或病其清议标榜，果定评欤？唐初文学最盛。中叶以后，干进者至有求知己与温卷之名，隆替盛衰之故，试探其原。今欲使四海之内，邪慝不兴，正学日着，其道何之从？</p>
 </li>
 </ol>
-<div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
 <h1 id="李兵书院大师朱熹的科举生涯与科举观评析"><a class="header" href="#李兵书院大师朱熹的科举生涯与科举观评析">李兵《书院大师朱熹的科举生涯与科举观评析》</a></h1>
 <p>摘 要：</p>
 <p>朱熹是南宋新儒学的集大成者，他在推动南宋书院发展的同时，对科举制度提出了严厉的批评，但他并不从根本上否定科举制度。在苦读应试经历的感性认识基础上，朱熹提出了重视德业修养的科举观，反对片面追求科举功名。这是新儒家在频繁禁学的背景下，为规避禁学的压制，利用其对学术话语权的掌握来参与现实问题的主要内容之一。因此，自20世纪30年代开始，不少研究者所持的南宋书院反科举的观点就值得商榷了。</p>
@@ -305,7 +287,7 @@
 <p>在朱熹的科举观中，既严厉批评科举制度，又允许生徒在掌握足够的儒家经典知识之后应举，这种似乎自相矛盾的观点恰恰反映了朱熹的学术理想与社会现实之间的不协调性。一方面，南宋朝廷的频繁禁学运动，使以朱熹为代表的大多数新儒家只能处于政治的边缘，他们以书院为大本营，将学术话语权牢牢地控制在自己手中，使宋代再次出现了政治重心和学术重心分离的现象。为规避禁学的压制，他们只能在学术上坚守高调的道德理想主义，必然利用其对学术话语权的掌握来批评现实，而科举和官学是与士人关系最为密切的制度，多数新儒家对科举与官学制度都相当熟知，很容易从自己所信奉的理想的角度出发窥见其中的纰漏，按照自身或者本学派的信仰来批评它，并试图按照新儒家所坚持的理想模式改而造之。从这一角度而言，以朱熹为代表的新儒家批评科举制度的言论并不是完全建立在全面认识基础上的，批评者的主观因素占了相当大的成分。</p>
 <p>另一方面，以朱熹为代表的新儒家又认识到宋代科举取士制度已经成为士人实现儒家修、齐、治、平理想的必经之途，科举制度已经成为士人的普遍追求，金榜题名成为士人终身追求的目标，朱熹说：“盖入学者既有舍法之刊，又有科举之利，不入学者止有科举一涂，这里便是不均，利之所在，人谁不趋？”（《朱子语类》卷109《论取士》，2427页）正因为如此，朱熹等新儒家为获得支持者，绝对不可能反对或禁止生徒读书应举，只是要求生徒将德性养成摆在首要的位置。此外，他们自身的科举经历也使其感受到科举制度在士人心中的位置，更不可能从根本上否定之。</p>
 <p>因此，通过对朱熹科举观的个案分析，我们可以清楚地看到南宋新儒家并不从根本上反对科举制度，只是理想地希望科举制度按照他们所设计的模式进行相应的改革。这样，南宋书院的主要精神是反对科举的观点似乎就不是十分准确了。</p>
-<div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
 <h1 id="朱子论取士"><a class="header" href="#朱子论取士">朱子论取士</a></h1>
 <p>来源：《朱子語類》</p>
 <p>“吕与叔欲奏立四科取士：曰德行，曰明经，曰政事，曰文学。德行则待州县举荐，下三科却许人投牒自试。明经里面分许多项目：如春秋则兼通三传，礼则通三礼，乐则尽通诸经所说乐处。某看来，乐处说也未尽。政事则如试法律等及行移决判事。又定为试辟，未试则以事授之，一年看其如何，辟则令所属长官举辟。”远器云：“这也只是法。”曰：“固是法，也待人而行，然这却法意详尽。如今科举，直是法先不是了。今来欲教吏部与二三郎官尽识得天下官之贤否，定是了不得这事！”〈贺孙〉</p>
@@ -335,7 +317,7 @@
 <p>科举种子不好。〈谓试官只是这般人。扬〉</p>
 <p>张孟远以书来论省试策题目，言今日之弊，在任法而不任人。孟远谓今日凡事伤不能守法。曰：“此皆偏说。今日乃是要做好事，则以碍法不容施行；及至做不好事，即便越法不顾，只是不勇于为善。”〈必大〉</p>
 <p>“科举是法弊。大抵立法，只是立个得人之法。若有奉行非其人，却不干法事，若只得人便可。今却是法弊，虽有良有司，亦无如之何。”王嘉叟云：“朝廷只有两般法：一是排连法，今铨部是也；一是信采法，今科举是也。”〈㽦〉</p>
-<div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
 <h1 id="宋史选举志"><a class="header" href="#宋史选举志">《宋史·选举志》</a></h1>
 <h2 id="宋史选举志科目上"><a class="header" href="#宋史选举志科目上">《宋史·选举志科目上》</a></h2>
 <p>自「敷奏以言，明試以功」、「三載考績，三考黜陟幽明」，始於《舜典》。司徒以鄉三物興賢能，太宰以三歲計吏治，詳於《周官》。兩漢而下，選舉之制不同，歸於得賢而已。考其大要，不過入仕則有貢舉之科，服官則有銓選之格，任事則有考課之法。然歷代之議貢舉者每曰：「取士以文藝，不若以德行。就文藝而參酌之，賦論之浮華，不若經義之實學。」議銓選者每曰：「以年勞取人，可以絕超躐，而不無賢愚同滯之歎；以薦舉取人，可以拔俊傑，而不無巧佞捷進之弊。」議考課者每曰：「拘吏文，則上下督察，浸成澆風；通譽望，則權貴請託，徒開利路。」於是議論紛紜，莫之一也。</p>
